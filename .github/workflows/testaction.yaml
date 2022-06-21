@@ -7,7 +7,7 @@ on:
 
 jobs:
 
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
 
@@ -17,4 +17,4 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Run az shell script
-      run: sh .github/helpers/deploy.sh
+      run: ls
