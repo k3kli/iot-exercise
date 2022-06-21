@@ -21,4 +21,5 @@ jobs:
       with:
         azcliversion: 2.30.0
         inlineScript: |
+          az config set extension.use_dynamic_install=yes_without_prompt
           az iot device c2d-message send -d testdevice -n kevworkshop --data '{"release": "${GITHUB_REF##*/"}'
