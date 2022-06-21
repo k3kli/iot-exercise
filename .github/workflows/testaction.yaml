@@ -17,9 +17,4 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Run az shell script
-      uses: azure/CLI@v1
-      with:
-        azcliversion: 2.30.0
-        inlineScript: |
-          chmod +x $GITHUB_WORKSPACE/.github/helpers/deploy.sh
-          $GITHUB_WORKSPACE/.github/helpers/deploy.sh
+      run: sh .github/helpers/deploy.sh
