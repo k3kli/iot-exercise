@@ -16,16 +16,9 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Install IoT Extension
+    - name: Run az shell script
       uses: azure/CLI@v1
       with:
         azcliversion: 2.30.0
         inlineScript: |
-          az extension add --name azure-iot --yes
-    
-    - name: Send new message to device
-      uses: azure/CLI@v1
-      with:
-        azcliversion: 2.30.0
-        inlineScript: |
-          az iot device c2d-message send -d testdevice -n kevworkshop --data '{"release": "release/v0.1.0"}'
+          $GITHUB_WORKSPACE/.github/helpers/deploy.sh
