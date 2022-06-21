@@ -22,4 +22,5 @@ jobs:
       with:
         azcliversion: 2.30.0
         inlineScript: |
+          chmod +x .github/helpers/deploy.sh
           .github/helpers/deploy.sh
