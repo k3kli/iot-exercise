@@ -1,12 +1,21 @@
-on: [push]
+push:
+    branches:
+      - 'release/v**'
 
-name: AzureLoginSample
+name: Deploy new script
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Log in with Azure
-        uses: azure/login@v1
+      - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Azure CLI script
+        uses: azure/CLI@v1
         with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          azcliversion: 2.30.0
+          inlineScript: |
+            az iot device c2d-message send -d testdevice -n kevworkshop --data '{"release": "${GITHUB_REF##*/"}'
